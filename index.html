@@ -13,11 +13,14 @@
   <body>
     <canvas id = "myCanvas" width= "800" height= "800" > </canvas>
 
-    <input type = "color" id = "colorPicker" value = #ff0000>
-
-    <button onclick = "changeColor()"> Change Color </button>
+    <!-- I got help with the color picker from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_color_value2 -->
+    <div>
+      <input type = "color" id = "newColor" value = #ff0000>
+      <button onclick = "changeColor()"> Change Color </button>
+    </div>
 
     <script>
+      // I got help setting up Canvas drawing from https://www.w3schools.com/html/html5_canvas.asp
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       var x = 100;
@@ -25,6 +28,7 @@
       var radius = 10;
       var color = "#ff0000";
 
+      // I got help with understanding listeners from the week 11 in-class exercise
       window.addEventListener('mousemove', function (e) {
         console.log("newX = " + e.pageX);
         console.log("newY = " + e.pageY);
@@ -33,6 +37,7 @@
         draw();
       })
 
+      // I got help with these listeners from https://www.w3schools.com/graphics/game_controllers.asp
       window.addEventListener('keypress', function (e) {
         console.log(e.keyCode);
         if (e.keyCode == "32") {
@@ -49,6 +54,7 @@
         draw();
       })
 
+      // I got help with these listeners from https://stackoverflow.com/questions/5597060/detecting-arrow-key-presses-in-javascript
       window.addEventListener('keydown', function (e) {
         console.log(e.keyCode);
         console.log(radius);
@@ -62,19 +68,14 @@
         draw();
       })
 
+      // I got help with touchmove from https://www.w3schools.com/graphics/game_controllers.asp
       window.addEventListener('touchmove', function (e) {
         x = e.touches[0].pageX;
         y = e.touches[0].pageY;
         draw();
       })
 
-
-      window.addEventListener('onclick', function (e) {
-        console.log(color);
-
-        changeColor();
-      })
-
+      // I got help with this function from https://www.w3schools.com/tags/canvas_arc.asp
       function draw() {
         ctx.beginPath();
         ctx.fillStyle = color
@@ -82,12 +83,10 @@
         ctx.fill();
       }
 
+      // I got help with this function from https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_color_value2
       function changeColor() {
-        color = document.getElementById("colorPicker").value;
+        color = document.getElementById("newColor").value;
       }
-
-
-
 
     </script>
   </body>
