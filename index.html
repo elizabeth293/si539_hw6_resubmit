@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Canvas </title>
+      <style>
+      #myCanvas {
+        border: 1px solid #000000;
+      }
+      </style>
+  </head>
+
+  <body>
+    <canvas id = "myCanvas" width= "800" height= "800" > </canvas>
+
+    <input type = "color" id = "colorPicker" value = #ff0000>
+
+    <script>
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      var x = 100;
+      var y = 100;
+      var radius = 10;
+      var color = "#ff0000";
+
+      window.addEventListener('mousemove', function (e) {
+        console.log("newX = " + e.pageX);
+        console.log("newY = " + e.pageY);
+        x = e.pageX;
+        y = e.pageY;
+        draw();
+      })
+
+      window.addEventListener('keypress', function (e) {
+        console.log(e.keyCode);
+        if (e.keyCode == "32") {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        } else if (e.keyCode == "98") {
+          color = "blue";
+        } else if (e.keyCode == "103") {
+          color = "green";
+        } else if (e.keyCode == "121") {
+          color = "yellow";
+        } else if (e.keyCode == "114") {
+          color = "red";
+        }
+        draw();
+      })
+
+      window.addEventListener('keydown', function (e) {
+        console.log(e.keyCode);
+        console.log(radius);
+        if (e.keyCode == "38") {
+          radius = radius + 5;
+        } else if (e.keyCode == "40") {
+          if (radius > "0") {
+            radius = radius - 5;
+          }
+        }
+        draw();
+      })
+
+      window.addEventListener('touchmove', function (e) {
+        x = e.touches[0].pageX;
+        y = e.touches[0].pageY;
+        draw();
+      })
+
+
+      window.addEventListener('onclick', function (e) {
+        console.log(color);
+
+        changeColor();
+      })
+
+      function draw() {
+        ctx.beginPath();
+        ctx.fillStyle = color
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+
+      function changeColor() {
+        color = document.getElementById("colorPicker").value;
+      }
+
+
+
+
+    </script>
+  </body>
+</html>
